@@ -1,0 +1,23 @@
+@import url('/font-awesome/css/font-awesome.min.css');
+
+input.validate {
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+}
+
+body {
+  background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');
+}
+
+a {
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+}
+
+.resize {
+  margin-left : 2%;
+}

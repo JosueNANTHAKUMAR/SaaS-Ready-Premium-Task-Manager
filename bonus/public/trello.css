@@ -1,0 +1,117 @@
+body {
+	background-color: #46a7ce;
+	background-image: url('pikachu.gif');
+	width:90%;
+	margin:auto;
+	min-width:600px;
+	max-width:2000px
+}
+
+strong {
+	font-size: 50px;
+	color: red;
+	text-decoration: underline;
+	font-style: italic;
+}
+
+h1 {
+	text-align: center;
+	color: pink;
+	text-decoration: underline;
+}
+
+h2 {
+	border: none;
+	font-size: 40px;
+	text-align: center;
+	background-color: rgb(214, 218, 164);
+}
+
+p {
+	font-size: 25px;
+    font-style: oblique;
+}
+
+SELECT {
+	border: groove;
+	padding: 0 10px;
+	border-style: groove;
+  	height: 40px;
+}
+
+.ID input {
+  font-size: 15px;
+  border: groove;
+  border-color: pink;
+  width: 100%;
+  outline: none;
+  background: white;
+  border-style: groove;
+  padding: 0 10px;
+  height: 40px;
+
+}
+
+.add {
+	float: right;
+	width: 290px;
+	height: 300px;
+	display: block;
+	margin: 0px;
+	position:absolute;
+	left:80px;
+	top:200px;
+	border-color: transparent;
+	border-radius: 10px;
+	border-width: 30px;
+	border-style: solid;
+	background-color: blue;
+}
+
+.modif {
+	float: right;
+	width: 290px;
+	height: 300px;
+	display: block;
+	margin: 0px;
+	position:absolute;
+	left:80px;
+	top:600px;
+	border-color: transparent;
+	border-radius: 10px;
+	border-width: 30px;
+	border-style: solid;
+	background-color: blue
+}
+
+.table {
+	float: left;
+	width: 1200px;
+	height: 1200px;
+	display: block;
+	margin: 15px;
+	position:absolute;
+	left:500px;
+	top:150px;
+	border-color: transparent;
+	border-radius: 10px;
+	border-width: 30px;
+	border-style: solid;
+	background-color: blue;
+}
+
+.bouton {
+    width: 50%;
+	height: 30px;
+  	border: outset;
+  	background-size: 100%;
+  	background-color: #0077ff;
+  	color: white;
+  	outline: none;
+  	cursor: pointer;
+  	position: center;
+}
+
+form {
+	text-align: center;
+}

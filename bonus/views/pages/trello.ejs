@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Page d'accueil</title>
+	<link rel="stylesheet" href="/trello.css">
+</head>
+
+<body>
+	<form class="add" method="POST" action="/todos_created">
+		<h1>Ajout d'une task</h1>
+		<div class="ID">
+            <input type="text" name="Title" required placeholder="Nom de la task">
+		    <input type="text" name="Description" required placeholder="Description">
+		    <input type="date" name="Fin" required placeholder="Date de fin">
+			<select  name="Status">
+				<option value="A faire">A faire</option>
+				<option value="En cours">En cours</option>
+				<option value="Finis">Finis</option>
+			</select>
+        </div>
+		<input type="submit" class="bouton" value="Valider"><br>
+	</form>
+
+	<form class="modif" method="POST" action="/set_status">
+		<h1>Modifier le status d'une task</h1>
+		<div class="ID">
+            <input type="text" name="Title" required placeholder="Nom de la task">
+		    <select name="status" size="1">
+				<option>A faire</option>
+				<option>En cours</option>
+				<option>Finis</option>
+			</select>
+        </div>
+		<input type="submit" class="bouton" value="Valider"><br>
+	</form>
+
+	<form class="table" method="POST" >
+		<h1>Liste des tasks</h1>
+		<div class="ID">
+			<TABLE BORDER="3"  WIDTH="100%">
+			   <TH>NOM</TH>
+			   <TH>DÉBUT</TH>
+			   <TH>FIN</TH>
+			   <TH>STATUT</TH>
+			</TABLE>
+			<% for (i = 0; i < results.length; i++) { %>
+				<TABLE BORDER="3"  WIDTH="100%">
+					<TH><%= results[i].title %></</TH>
+					<TH> <%= results[i].created_at %></</TH>
+					<TH><%= results[i].due_time %></TH>
+					<TH><%= results[i].status %></TH>
+				</TABLE>
+			<% } %>
+        </div>
+	</form>
+</body>
+</html>
