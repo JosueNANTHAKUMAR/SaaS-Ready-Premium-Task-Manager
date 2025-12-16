@@ -1,62 +1,62 @@
-# Epytodo - Modern Task Management
+# Epytodo - Gestion de Tâches Moderne
 
-![Epytodo Banner](screenshots/dashboard_page.png)
+![Bannière Epytodo](screenshots/dashboard_page.png)
 
-A premium, modern task management application designed with a **Glassmorphism** aesthetic and a focus on user experience. Built with Node.js and Express, this project demonstrates a complete UI/UX overhaul of a classic web application.
+Une application de gestion de tâches premium et moderne, conçue avec une esthétique **Glassmorphism** et une attention particulière portée à l'expérience utilisateur. Développé avec Node.js et Express, ce projet démontre une refonte complète de l'UI/UX d'une application web classique.
 
-## 🌟 Features
+## 🌟 Fonctionnalités
 
--   **Modern UI/UX**: Sleek Dark Mode with Glassmorphism elements.
--   **Fluid Animations**: Smooth transitions and interactive elements.
--   **Kanban Dashboard**: Visualize tasks in To Do, In Progress, and Done columns.
--   **Responsive Design**: Fully optimized for desktop and mobile devices.
--   **Secure Authentication**: User registration and login system.
+-   **UI/UX Moderne** : Mode Sombre élégant avec des éléments en Glassmorphism.
+-   **Animations Fluides** : Transitions douces et éléments interactifs.
+-   **Tableau de Bord Kanban** : Visualisez les tâches dans les colonnes À faire, En cours et Terminé.
+-   **Design Responsive** : Entièrement optimisé pour les ordinateurs et les mobiles.
+-   **Authentification Sécurisée** : Système d'inscription et de connexion utilisateur.
 
-## 🛠️ Tech Stack
+## 🛠️ Stack Technique
 
--   **Frontend**: EJS (Templating), CSS3 (Variables, Flexbox, Grid), Vanilla JS.
--   **Backend**: Node.js, Express.js.
--   **Database**: MySQL.
--   **Authentication**: JWT, Bcrypt.js.
+-   **Frontend** : EJS (Templating), CSS3 (Variables, Flexbox, Grid), Vanilla JS.
+-   **Backend** : Node.js, Express.js.
+-   **Base de Données** : MySQL.
+-   **Authentification** : JWT, Bcrypt.js.
 
 ## 🚀 Installation
 
-1.  **Clone the repository**
+1.  **Cloner le dépôt**
     ```bash
-    git clone https://github.com/yourusername/epytodo.git
+    git clone https://github.com/votre-nom-utilisateur/epytodo.git
     cd epytodo/bonus
     ```
 
-2.  **Install Dependencies**
+2.  **Installer les dépendances**
     ```bash
     npm install
     ```
 
-3.  **Configure Database**
-    -   Import `epytodo.sql` into your MySQL database.
-    -   Create a `.env` file in the `bonus` directory:
+3.  **Configurer la Base de Données**
+    -   Importez `epytodo.sql` dans votre base de données MySQL.
+    -   Créez un fichier `.env` dans le dossier `bonus` :
         ```env
         MYSQL_HOST=localhost
         MYSQL_USER=root
-        MYSQL_ROOT_PASSWORD=yourpassword
+        MYSQL_ROOT_PASSWORD=votre_mot_de_passe
         MYSQL_DATABASE=epytodo
         PORT=3000
         ```
 
-4.  **Start the Application**
+4.  **Lancer l'Application**
     ```bash
     npm start
     ```
 
-5.  **Visit the App**
-    Open `http://localhost:3000` in your browser.
+5.  **Accéder à l'App**
+    Ouvrez `http://localhost:3000` dans votre navigateur.
 
-## 📸 Gallery
+## 📸 Galerie
 
-| Login Screen | Register Screen | Dashboard |
+| Écran de Connexion | Écran d'Inscription | Tableau de Bord |
 |:---:|:---:|:---:|
-| ![Login](screenshots/login_page.png) | ![Register](screenshots/register_page.png) | ![Dashboard](screenshots/dashboard_page.png) |
+| ![Connexion](screenshots/login_page.png) | ![Inscription](screenshots/register_page.png) | ![Tableau de Bord](screenshots/dashboard_page.png) |
 
 ---
 
-*Designed & Developed by Josué - 2025*
+*Conçu & Développé par Josué - 2025*
