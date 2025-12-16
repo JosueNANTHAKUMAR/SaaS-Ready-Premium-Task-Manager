@@ -1,43 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Bootstrap Example</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href=" /style.css">
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epytodo - Portfolio Showcase</title>
+    <link rel="stylesheet" href="/modern.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
 <body>
-    <div class="ui negative message">
-    </div>
-    <div class="modal-dialog modal-notify modal-warning">
-        <div class="modal-content">
+    <div class="container center-screen">
+        <div class="auth-container animate-fade-in">
+            <!-- Login Card -->
+            <div class="glass-panel auth-card">
+                <h2 class="auth-title">Welcome Back</h2>
+                
                 <% if(locals.err_msg) { %>
-                    <div class="alert alert-danger" class="resize"role="alert">
+                    <div class="alert alert-danger">
                         <%= err_msg %>
                     </div>
                 <% } %>
-            <form action="/login" method="post">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title white-text w-100 font-weight-bold py-2">Se connecter</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="md-form mb-5">
-                        <input type="email" class="form-control validate" name="email" placeholder="&#xF007; Email"/>
-                    </div>
-                    <div class="md-form">
-                        <input type="password" class="form-control validate" name="password" placeholder="&#xF023; Mot de passe">
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="submit" class="btn btn-outline-warning waves-effect">Se connecter</button>
-                </div>
-            </form>
-            <div class="modal-footer justify-content-center">
-                <form action="/register" method="post">
-                    <button type="submit" class="btn btn-outline-danger">S'inscrire</button>
+
+                <form action="/login" method="post" style="width: 100%;">
+                    <input type="email" class="glass-input" name="email" placeholder="Email" required>
+                    <input type="password" class="glass-input" name="password" placeholder="Password" required>
+                    <button type="submit" class="glass-btn" style="width: 100%; margin-top: 10px;">
+                        Log In
+                    </button>
+                </form>
+            </div>
+
+            <!-- Register Card -->
+            <div class="glass-panel auth-card">
+                <h2 class="auth-title">New Here?</h2>
+                <p style="margin-bottom: 30px; opacity: 0.8;">Join us and manage your tasks with style.</p>
+                
+                <form action="/register" method="post" style="width: 100%;">
+                    <button type="submit" class="glass-btn" style="background: transparent; border: 2px solid var(--secondary-color); width: 100%;">
+                        Create Account
+                    </button>
                 </form>
             </div>
         </div>
     </div>
-
-<%- include('footer') %>
+</body>
+</html>

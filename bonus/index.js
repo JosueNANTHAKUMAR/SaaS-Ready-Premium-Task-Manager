@@ -9,9 +9,7 @@ require('dotenv').config()
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
-app.use("/css", express.static("node_modules/bootstrap/dist/css"))
-app.use("/js", express.static("node_modules/bootstrap/dist/js"))
-app.use("/js", express.static("node_modules/jquery/dist"))
+
 
 app.use(express.urlencoded({ extended: false}));
 app.use(express.json());
@@ -21,6 +19,8 @@ const port = process.env.PORT;
 app.get('/', function(req, res) {
     res.render('pages/index.ejs');
 });
+
+
 
 app.post('/register', function(req, res) {
     res.render('pages/inscription.ejs');

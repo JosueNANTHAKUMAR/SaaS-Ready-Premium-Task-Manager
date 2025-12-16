@@ -1,58 +1,259 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<title>Page d'accueil</title>
-	<link rel="stylesheet" href="/trello.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard - Epytodo</title>
+	<link rel="stylesheet" href="/modern.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<style>
+		.dashboard-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 20px;
+			padding: 20px 0;
+		}
+
+		.kanban-column {
+			background: rgba(255, 255, 255, 0.05);
+			border-radius: 16px;
+			padding: 20px;
+			min-height: 500px;
+		}
+
+		.column-header {
+			font-size: 1.2rem;
+			font-weight: bold;
+			margin-bottom: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.task-card {
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 12px;
+			padding: 15px;
+			margin-bottom: 15px;
+			transition: transform 0.2s;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+		}
+
+		.task-card:hover {
+			transform: translateY(-3px);
+			background: rgba(255, 255, 255, 0.15);
+		}
+
+		.task-title {
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+		.task-meta {
+			font-size: 0.8rem;
+			opacity: 0.7;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.fab-add {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			background: var(--secondary-color);
+			color: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+			cursor: pointer;
+			border: none;
+			transition: transform 0.2s;
+		}
+
+		.fab-add:hover {
+			transform: scale(1.1);
+		}
+
+		/* Modal Styles */
+		.modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.7);
+			align-items: center;
+			justify-content: center;
+			z-index: 1000;
+		}
+
+		.modal.active {
+			display: flex;
+		}
+	</style>
 </head>
 
 <body>
-	<form class="add" method="POST" action="/todos_created">
-		<h1>Ajout d'une task</h1>
-		<div class="ID">
-            <input type="text" name="Title" required placeholder="Nom de la task">
-		    <input type="text" name="Description" required placeholder="Description">
-		    <input type="date" name="Fin" required placeholder="Date de fin">
-			<select  name="Status">
-				<option value="A faire">A faire</option>
-				<option value="En cours">En cours</option>
-				<option value="Finis">Finis</option>
-			</select>
-        </div>
-		<input type="submit" class="bouton" value="Valider"><br>
-	</form>
+	<nav class="glass-panel"
+		style="margin: 20px; padding: 15px 30px; border-radius: 50px; display: flex; justify-content: space-between; align-items: center;">
+		<div class="logo">Epytodo</div>
+		<div>
+			<span style="margin-right: 20px;">Welcome!</span>
+			<a href="/logout" class="glass-btn" style="padding: 8px 20px; font-size: 0.9rem;">Logout</a>
+		</div>
+	</nav>
 
-	<form class="modif" method="POST" action="/set_status">
-		<h1>Modifier le status d'une task</h1>
-		<div class="ID">
-            <input type="text" name="Title" required placeholder="Nom de la task">
-		    <select name="status" size="1">
-				<option>A faire</option>
-				<option>En cours</option>
-				<option>Finis</option>
-			</select>
-        </div>
-		<input type="submit" class="bouton" value="Valider"><br>
-	</form>
+	<div class="container">
+		<div class="dashboard-grid">
+			<!-- To Do Column -->
+			<div class="kanban-column">
+				<div class="column-header">
+					<span><i class="fas fa-circle" style="color: #ff6b6b; font-size: 10px; margin-right: 10px;"></i> To
+						Do</span>
+					<span class="badge">
+						<%= results.filter(t=> t.status === 'A faire').length %>
+					</span>
+				</div>
+				<% results.filter(t=> t.status === 'A faire').forEach(function(task) { %>
+					<div class="task-card"
+						onclick="openEditModal('<%= task.id %>', '<%= task.title %>', '<%= task.status %>')">
+						<div class="task-title">
+							<%= task.title %>
+						</div>
+						<div class="task-meta">
+							<span>
+								<%= task.description %>
+							</span>
+							<span>
+								<%= new Date(task.due_time).toLocaleDateString() %>
+							</span>
+						</div>
+					</div>
+					<% }); %>
+			</div>
 
-	<form class="table" method="POST" >
-		<h1>Liste des tasks</h1>
-		<div class="ID">
-			<TABLE BORDER="3"  WIDTH="100%">
-			   <TH>NOM</TH>
-			   <TH>DÉBUT</TH>
-			   <TH>FIN</TH>
-			   <TH>STATUT</TH>
-			</TABLE>
-			<% for (i = 0; i < results.length; i++) { %>
-				<TABLE BORDER="3"  WIDTH="100%">
-					<TH><%= results[i].title %></</TH>
-					<TH> <%= results[i].created_at %></</TH>
-					<TH><%= results[i].due_time %></TH>
-					<TH><%= results[i].status %></TH>
-				</TABLE>
-			<% } %>
-        </div>
-	</form>
+			<!-- In Progress Column -->
+			<div class="kanban-column">
+				<div class="column-header">
+					<span><i class="fas fa-circle" style="color: #feca57; font-size: 10px; margin-right: 10px;"></i> In
+						Progress</span>
+					<span class="badge">
+						<%= results.filter(t=> t.status === 'En cours').length %>
+					</span>
+				</div>
+				<% results.filter(t=> t.status === 'En cours').forEach(function(task) { %>
+					<div class="task-card"
+						onclick="openEditModal('<%= task.id %>', '<%= task.title %>', '<%= task.status %>')">
+						<div class="task-title">
+							<%= task.title %>
+						</div>
+						<div class="task-meta">
+							<span>
+								<%= task.description %>
+							</span>
+							<span>
+								<%= new Date(task.due_time).toLocaleDateString() %>
+							</span>
+						</div>
+					</div>
+					<% }); %>
+			</div>
+
+			<!-- Done Column -->
+			<div class="kanban-column">
+				<div class="column-header">
+					<span><i class="fas fa-circle" style="color: #1dd1a1; font-size: 10px; margin-right: 10px;"></i>
+						Done</span>
+					<span class="badge">
+						<%= results.filter(t=> t.status === 'Finis').length %>
+					</span>
+				</div>
+				<% results.filter(t=> t.status === 'Finis').forEach(function(task) { %>
+					<div class="task-card"
+						onclick="openEditModal('<%= task.id %>', '<%= task.title %>', '<%= task.status %>')">
+						<div class="task-title">
+							<%= task.title %>
+						</div>
+						<div class="task-meta">
+							<span>
+								<%= task.description %>
+							</span>
+							<span>
+								<%= new Date(task.due_time).toLocaleDateString() %>
+							</span>
+						</div>
+					</div>
+					<% }); %>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add Task Button -->
+	<button class="fab-add" onclick="document.getElementById('addModal').classList.add('active')">
+		<i class="fas fa-plus"></i>
+	</button>
+
+	<!-- Add Task Modal -->
+	<div id="addModal" class="modal">
+		<div class="glass-panel auth-card" style="width: 400px; position: relative;">
+			<button onclick="document.getElementById('addModal').classList.remove('active')"
+				style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; cursor: pointer;">
+				<i class="fas fa-times"></i>
+			</button>
+			<h3 style="margin-bottom: 20px;">New Task</h3>
+			<form action="/todos_created" method="POST" style="width: 100%;">
+				<input type="text" name="Title" class="glass-input" placeholder="Task Title" required>
+				<input type="text" name="Description" class="glass-input" placeholder="Description" required>
+				<input type="date" name="Fin" class="glass-input" required>
+				<select name="Status" class="glass-input" style="color: black;">
+					<!-- Selects are tricky to style in glass -->
+					<option value="A faire">To Do</option>
+					<option value="En cours">In Progress</option>
+					<option value="Finis">Done</option>
+				</select>
+				<button type="submit" class="glass-btn" style="width: 100%;">Create Task</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- Edit Status Modal (Simplified for now) -->
+	<div id="editModal" class="modal">
+		<div class="glass-panel auth-card" style="width: 400px; position: relative;">
+			<button onclick="document.getElementById('editModal').classList.remove('active')"
+				style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; cursor: pointer;">
+				<i class="fas fa-times"></i>
+			</button>
+			<h3 style="margin-bottom: 20px;">Update Status</h3>
+			<form action="/set_status" method="POST" style="width: 100%;">
+				<input type="hidden" id="editTaskId" name="id">
+				<!-- Assuming backend needs ID, but original form used Title? Let's check original -->
+				<input type="text" id="editTaskTitle" name="Title" class="glass-input" placeholder="Task Title"
+					readonly>
+				<select name="status" class="glass-input" style="color: black;">
+					<option value="A faire">To Do</option>
+					<option value="En cours">In Progress</option>
+					<option value="Finis">Done</option>
+				</select>
+				<button type="submit" class="glass-btn" style="width: 100%;">Update Status</button>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		function openEditModal(id, title, status) {
+			document.getElementById('editTaskTitle').value = title;
+			// document.getElementById('editTaskId').value = id; // Original form didn't seem to use ID, it used Title to identify? That's risky but I must follow existing backend logic.
+			// Original form: <input type="text" name="Title" required placeholder="Nom de la task">
+			document.getElementById('editModal').classList.add('active');
+		}
+	</script>
 </body>
+
 </html>
